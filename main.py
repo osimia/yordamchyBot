@@ -8,11 +8,14 @@ from handlers import (
     start_handler, add_start, add_amount, add_type,
     add_category, add_description, cancel_add,
     balance_handler, report_handler, lang_handler,
-    lang_set, button_text_handler
+    lang_set, button_text_handler,
+    edit_last_start, edit_last_choose_field, edit_last_edit_type,
+    edit_last_edit_category, edit_last_edit_amount, edit_last_edit_description, edit_last_delete
 )
 
 # Стейты
 AMOUNT, TYPE, CATEGORY, DESCRIPTION = range(4)
+EDIT_CHOOSE, EDIT_TYPE, EDIT_CATEGORY, EDIT_AMOUNT, EDIT_DESCRIPTION, EDIT_CONFIRM = range(10, 16)
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -32,6 +35,20 @@ def main():
         fallbacks=[CommandHandler("cancel", cancel_add)],
     )
     app.add_handler(add_conv)
+
+    # --- Edit Last Transaction ---
+    edit_last_conv = ConversationHandler(
+        entry_points=[CommandHandler("edit_last", edit_last_start)],
+        states={
+            EDIT_CHOOSE: [CallbackQueryHandler(edit_last_choose_field)],
+            EDIT_TYPE: [CallbackQueryHandler(edit_last_edit_type)],
+            EDIT_CATEGORY: [CallbackQueryHandler(edit_last_edit_category)],
+            EDIT_AMOUNT: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_last_edit_amount)],
+            EDIT_DESCRIPTION: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_last_edit_description)],
+        },
+        fallbacks=[CommandHandler("cancel", cancel_add)],
+    )
+    app.add_handler(edit_last_conv)
 
     # Основные команды
     app.add_handler(CommandHandler("start", start_handler))
