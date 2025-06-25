@@ -85,15 +85,15 @@ async def add_type(update: Update, context: ContextTypes.DEFAULT_TYPE):
     lang = get_lang(update.effective_user.id)
     if context.user_data["type"] == "income":
         keyboard = [
-            [InlineKeyboardButton("💵 Зарплата", callback_data="salary")],
-            [InlineKeyboardButton("💰 Бонус", callback_data="bonus")],
-            [InlineKeyboardButton("🎁 Подарок", callback_data="gift")]
+            [InlineKeyboardButton(get_text(lang, "salary"), callback_data="salary")],
+            [InlineKeyboardButton(get_text(lang, "bonus"), callback_data="bonus")],
+            [InlineKeyboardButton(get_text(lang, "gift"), callback_data="gift")]
         ]
     else:
         keyboard = [
-            [InlineKeyboardButton("🍔 Еда", callback_data="food")],
-            [InlineKeyboardButton("🚕 Транспорт", callback_data="transport")],
-            [InlineKeyboardButton("🏠 Аренда", callback_data="rent")]
+            [InlineKeyboardButton(get_text(lang, "food"), callback_data="food")],
+            [InlineKeyboardButton(get_text(lang, "transport"), callback_data="transport")],
+            [InlineKeyboardButton(get_text(lang, "rent"), callback_data="rent")]
         ]
     await update.callback_query.message.reply_text(get_text(lang, "choose_category"), reply_markup=InlineKeyboardMarkup(keyboard))
     return CATEGORY
@@ -218,3 +218,11 @@ async def lang_set(update: Update, context: ContextTypes.DEFAULT_TYPE):
     session.close()
 
     await update.callback_query.message.reply_text(get_text(lang_code, "language_changed"))
+
+    # Обновляем меню на выбранном языке
+    keyboard = [
+        [get_text(lang_code, "btn_add"), get_text(lang_code, "btn_balance")],
+        [get_text(lang_code, "btn_report"), get_text(lang_code, "btn_lang")]
+    ]
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    await update.callback_query.message.reply_text(get_text(lang_code, "start"), reply_markup=reply_markup)

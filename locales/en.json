@@ -12,5 +12,11 @@
   "btn_balance": "💰 Balance",
   "btn_report": "📊 Report",
   "btn_lang": "🌍 Language",
-  "unknown_command": "I didn't understand. Please use the menu."
+  "unknown_command": "I didn't understand. Please use the menu.",
+  "salary": "Salary",
+  "bonus": "Bonus",
+  "gift": "Gift",
+  "food": "Food",
+  "transport": "Transport",
+  "rent": "Rent"
 }
