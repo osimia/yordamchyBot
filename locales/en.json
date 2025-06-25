@@ -1,0 +1,16 @@
+{
+  "start": "👋 Hello! I'm your financial assistant. Let's track your income and expenses!",
+  "add_amount": "Enter the amount (e.g., 125.50):",
+  "choose_type": "Is it income or expense?",
+  "income": "Income",
+  "expense": "Expense",
+  "choose_category": "Choose a category:",
+  "add_description": "Enter a description (or send '-' if none):",
+  "language_changed": "✅ Language changed to English.",
+  "saved": "✅ Record saved!",
+  "btn_add": "📥 Add",
+  "btn_balance": "💰 Balance",
+  "btn_report": "📊 Report",
+  "btn_lang": "🌍 Language",
+  "unknown_command": "I didn't understand. Please use the menu."
+}

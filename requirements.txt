@@ -1,0 +1,6 @@
+python-telegram-bot==21.9
+SQLAlchemy==2.0.41
+psycopg2-binary
+matplotlib
+python-dotenv
+# For development purposes, you might want to include these:
