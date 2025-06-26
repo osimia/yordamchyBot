@@ -104,6 +104,7 @@ def webhook():
 # Асинхронная настройка
 async def setup():
     await application.initialize()
+    await application.start()  # ← Это обязательно!
     await application.bot.set_webhook(url=f"{WEBHOOK_DOMAIN}{WEBHOOK_PATH}")
     logger.info("✅ Webhook установлен")
 
