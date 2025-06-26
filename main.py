@@ -87,13 +87,15 @@ def home():
 def webhook():
     try:
         data = request.get_json(force=True)
-        logger.info(f"📩 Получено обновление: {data}")
+        logger.info("📩 Update JSON: %s", data)
         update = Update.de_json(data, application.bot)
+        logger.info("✅ Update объект создан")
         application.update_queue.put(update)
         return "ok", 200
     except Exception as e:
         logger.exception("❌ Ошибка в обработке webhook")
         return "error", 500
+
 
 
 # Асинхронная настройка
