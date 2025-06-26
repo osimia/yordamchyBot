@@ -1,5 +1,6 @@
 import os
 import logging
+import telegram
 from flask import Flask, request
 from telegram import Update, Bot
 from telegram.ext import (
