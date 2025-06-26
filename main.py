@@ -60,6 +60,7 @@ application.add_handler(ConversationHandler(
         DESCRIPTION: [MessageHandler(filters.TEXT & ~filters.COMMAND, add_description)],
     },
     fallbacks=[CommandHandler("cancel", cancel_add)],
+    **per_message=True**
 ))
 
 application.add_handler(ConversationHandler(
@@ -72,6 +73,7 @@ application.add_handler(ConversationHandler(
         EDIT_DESCRIPTION: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_last_edit_description)],
     },
     fallbacks=[CommandHandler("cancel", cancel_add)],
+    **per_message=True**
 ))
 
 application.add_handler(CallbackQueryHandler(lang_set, pattern="^(ru|en|tg)$"))
