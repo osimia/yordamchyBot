@@ -86,15 +86,18 @@ def home():
 @app.route(WEBHOOK_PATH, methods=["POST"])
 def webhook():
     try:
-        data = request.get_json(force=True)
-        logger.info("📩 Update JSON: %s", data)
-        update = Update.de_json(data, application.bot)
-        logger.info("✅ Update объект создан")
+        logger.info("➡️ Запрос в /webhook получен")
+        data = request.get_data(as_text=True)
+        logger.info(f"📥 RAW JSON от Telegram:\n{data}")
+        json_data = request.get_json(force=True)
+        update = Update.de_json(json_data, application.bot)
         application.update_queue.put(update)
+        logger.info("✅ Обновление отправлено в очередь")
         return "ok", 200
     except Exception as e:
         logger.exception("❌ Ошибка в обработке webhook")
         return "error", 500
+
 
 
 
