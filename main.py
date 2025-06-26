@@ -81,16 +81,23 @@ def home():
     return "✅ Bot is running!"
 
 @app.route(WEBHOOK_PATH, methods=["POST"])
+@app.route(WEBHOOK_PATH, methods=["POST"])
 def webhook():
-    update = Update.de_json(request.get_json(force=True), application.bot)
-    application.update_queue.put(update)
-    return "ok"
+    try:
+        data = request.get_json(force=True)
+        logger.info(f"📩 Получено обновление: {data}")
+        update = Update.de_json(data, application.bot)
+        application.update_queue.put(update)
+        return "ok", 200
+    except Exception as e:
+        logger.exception("❌ Ошибка в обработке webhook")
+        return "error", 500
 
 if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)
     logger.info("✅ Таблицы созданы или уже существуют.")
-    
-    # 🧠 Устанавливаем webhook правильно
+
+    asyncio.run(application.initialize())
     asyncio.run(application.bot.set_webhook(url=f"{WEBHOOK_DOMAIN}{WEBHOOK_PATH}"))
     logger.info("✅ Webhook установлен")
 
