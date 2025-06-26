@@ -112,11 +112,11 @@ async def setup():
     logger.info("✅ Webhook установлен")
 
 
+Base.metadata.create_all(bind=engine)
+logger.info("✅ Таблицы созданы или уже существуют.")
+
+asyncio.run(setup())
+
 if __name__ == "__main__":
-    Base.metadata.create_all(bind=engine)
-    logger.info("✅ Таблицы созданы или уже существуют.")
-
-    asyncio.run(setup())
-
     PORT = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=PORT)
