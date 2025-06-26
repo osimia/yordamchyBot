@@ -85,8 +85,11 @@ application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, button_t
 def home():
     return "✅ Bot is running!"
 
-@app.route(WEBHOOK_PATH, methods=["POST"])
+@app.route(WEBHOOK_PATH, methods=["POST", "GET"])
 def webhook():
+    if request.method == "GET":
+        return "Webhook endpoint — use POST from Telegram", 200
+
     try:
         logger.info("➡️ Запрос в /webhook получен")
         data = request.get_data(as_text=True)
@@ -99,8 +102,6 @@ def webhook():
     except Exception as e:
         logger.exception("❌ Ошибка в обработке webhook")
         return "error", 500
-
-
 
 
 # Асинхронная настройка
