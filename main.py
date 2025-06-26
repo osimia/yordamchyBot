@@ -30,10 +30,10 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 # Переменные окружения
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-WEBHOOK_DOMAIN = os.getenv("WEBHOOK_DOMAIN")
-WEBHOOK_PATH = os.getenv("WEBHOOK_PATH", "/webhook")
-PORT = int(os.getenv("PORT", 8443))
+BOT_TOKEN = "7887045864:AAHGhqn23Z9oUzaZJO3fnzSr6FH5st4g22U"
+WEBHOOK_DOMAIN = "https://yordamchybot-production.up.railway.app"
+WEBHOOK_PATH = "/webhook"
+PORT = 8443
 
 if not BOT_TOKEN or not WEBHOOK_DOMAIN:
     raise Exception("BOT_TOKEN или WEBHOOK_DOMAIN не установлены!")
