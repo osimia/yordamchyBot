@@ -1,6 +1,7 @@
 import os
 import logging
 import telegram
+import asyncio  # ДОБАВЬ вверху, если ещё нет
 from flask import Flask, request
 from telegram import Update, Bot
 from telegram.ext import (
@@ -89,7 +90,9 @@ if __name__ == "__main__":
     Base.metadata.create_all(bind=engine)
     logger.info("✅ Таблицы созданы или уже существуют.")
     
-    application.bot.set_webhook(url=f"{WEBHOOK_DOMAIN}{WEBHOOK_PATH}")
+    # 🧠 Устанавливаем webhook правильно
+    asyncio.run(application.bot.set_webhook(url=f"{WEBHOOK_DOMAIN}{WEBHOOK_PATH}"))
     logger.info("✅ Webhook установлен")
-    
+
     app.run(host="0.0.0.0", port=PORT)
+
