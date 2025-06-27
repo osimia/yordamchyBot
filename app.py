@@ -25,9 +25,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ✅ Переменные окружения
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-WEBHOOK_DOMAIN = os.getenv("WEBHOOK_DOMAIN")  # Пример: https://yordamchybot.onrender.com
-WEBHOOK_PATH = os.getenv("WEBHOOK_PATH", "/webhook")
+BOT_TOKEN = "7887045864:AAHGhqn23Z9oUzaZJO3fnzSr6FH5st4g22U"
+WEBHOOK_DOMAIN = "https://yordamchybot.onrender.com"
+WEBHOOK_PATH = "/webhook"
 PORT = int(os.environ.get("PORT", 10000))  # Render автоматически задаёт переменную PORT
 
 # ✅ Проверка переменных
