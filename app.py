@@ -87,17 +87,16 @@ async def main():
     logger.info(f"📡 Устанавливаем webhook на: {webhook_url}")
 
     await application.initialize()
-    await application.bot.set_webhook(url=webhook_url)
     await application.start()
 
-    logger.info("🚀 Бот запущен через webhook!")
+    logger.info("🚀 Запуск бота через run_webhook()")
 
-    await application.updater.start_webhook(
+    await application.run_webhook(
         listen="0.0.0.0",
-        port=PORT
+        port=PORT,
+        webhook_path=WEBHOOK_PATH,
+        webhook_url=webhook_url
     )
-
-    await application.updater.idle()
 
 
 if __name__ == "__main__":
