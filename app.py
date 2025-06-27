@@ -87,7 +87,6 @@ async def main():
     logger.info(f"📡 Устанавливаем webhook на: {webhook_url}")
 
     await application.initialize()
-    await application.start()
 
     logger.info("🚀 Запуск бота через run_webhook()")
 
